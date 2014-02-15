@@ -1,0 +1,46 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='description', content='hearthstone deck analyser')
+    meta(name='author', content='Jason Hooten')
+
+    link(rel="shortcut icon", href="/favicon.ico?v=3", type="image/x-icon")
+    link(rel="icon", href="/favicon.ico?v=3", type="image/x-icon")
+    title Chillwind Yeti - Deck Analyzer
+    
+    // STYLES
+    link(rel="stylesheet", href="/linker/styles/lib/animate.css")
+    link(rel="stylesheet", href="/linker/styles/lib/font-awesome.min.css")
+    link(rel="stylesheet", href="/linker/styles/styles.css")
+    // STYLES END
+
+
+  - var heroIcon = ( hero ? 'background-image: url("images/class-image-' + hero + '.png");' : '')
+  body.hero-image(style=heroIcon)
+    #wrap
+      include _header
+      block content
+    include _footer
+
+    // SCRIPTS
+    script(type="text/javascript", src="/linker/js/socket.io.js")
+    script(type="text/javascript", src="/linker/js/sails.io.js")
+    script(type="text/javascript", src="/linker/js/Chart.js")
+    script(type="text/javascript", src="/linker/js/bootstrap.js")
+    script(type="text/javascript", src="/linker/js/jquery.js")
+    script(type="text/javascript", src="/linker/js/jquery.sparkline.min.js")
+    script(type="text/javascript", src="/linker/js/sails_example.js")
+    // SCRIPTS END
+
+    // TEMPLATES
+    
+    // TEMPLATES END
+
+    // External SCRIPTS
+    script(src='http://code.highcharts.com/highcharts.js')
+    script(src='http://static.wowhead.com/widgets/power.js')
+    script.
+      var wowhead_tooltips = { "colorlinks": false, "iconizelinks": false, "renamelinks": false };

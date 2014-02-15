@@ -1,0 +1,168 @@
+// Using (less) in front of a CSS file tells LESS compiler to include contents of CSS.
+// As a benefit, this will reduce the number of requests.
+@import (less) "lib/animate.css";
+@import (less) "lib/font-awesome.min.css";
+@import "lib/bootstrap/bootstrap";
+@import "themes/default";
+@import "themes/cosmo";
+
+
+
+// Sparklines tooltip
+// -------------------------
+.jqstooltip {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+
+// Scaffolding
+// -------------------------
+
+html, body {
+  height: 100%;
+}
+
+body {
+  padding-top: 70px;
+}
+
+#home {
+  h1 {
+    margin-bottom: 1em;
+    text-align: center;
+    font-size: 300%;
+  }
+}
+
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by its height */
+  margin: 0 auto -120px;
+  /* Pad bottom by footer height + (optional) extra spacing */
+  padding: 0 0 170px;
+}
+
+#footer {
+  height: 120px;
+  padding-top: 20px;
+  color: @navbar-default-color;
+  background-color: @navbar-default-bg;
+  border-top: 1px solid @navbar-default-border;
+  position: relative;;
+}
+
+// Navbar
+// -------------------------
+
+@navbar-height: 45px;
+
+.navbar {
+    input {
+      height: 30px;
+      margin-top: 8px;
+    }
+}
+
+.navbar-brand {
+  background-image: url('/img/logo.png');
+  background-repeat: no-repeat;
+  background-size: 30px;
+  background-position: left center;
+  padding-left: 40px;
+  margin-left: 15px;
+  height: 45px; // same as navbar height
+}
+
+
+.navbar-nav .profile-image {
+  width: 30px;
+  height: 30px;
+  margin: -15px 15px -15px 0;
+}
+
+
+// Default Size
+// -------------------------
+
+@report-default-width: 310px;
+@report-default-height: 200px;
+
+
+
+// Reports
+.default-chart {
+  height: @report-default-height;
+}
+
+.hero-image{
+  background-repeat: no-repeat;
+  background-size: 323px;
+  background-position: 5px 100px;
+}
+
+.main{
+    //background-color: #f5f5f5;
+}
+
+
+/* Hide for mobile, show later */
+.card-list {
+  display: none;
+}
+@media (min-width: 768px) {
+  .card-list {
+    display: block;
+    background-color: #fff;
+  }
+}
+
+// Extra space between font-awesome icons and text
+[class^="fa-"],
+[class*="fa-"] {
+  margin-right: 5px;
+}
+
+
+// Card Classes
+/////////////////////////////////////////////////////////////////////////////////
+@legendary-color: #F07000;
+@epic-color: #AB48EE;
+@rare-color: #198EFF;
+@uncommon-color: #0FAF03;
+@common-color: #000000;
+
+[class^="-legendary"],
+[class*="-legendary"] {
+  color: @legendary-color !important;
+}
+
+[class^="-epic"],
+[class*="-epic"] {
+  color: @epic-color !important;
+}
+
+[class^="-rare"],
+[class*="-rare"] {
+  color: @rare-color !important;
+}
+
+[class^="-uncommon"],
+[class*="-uncommon"],
+[class^="-common"],
+[class*="-common"] {
+  color: @uncommon-color !important;
+}
+
+[class^="-free"],
+[class*="-free"] {
+  color: @common-color !important;
+}
+
+[class^="rarity-"],
+[class*="rarity-"] {
+  text-decoration: none;
+}

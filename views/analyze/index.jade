@@ -1,0 +1,23 @@
+extends ../layout
+
+
+
+block content
+	.container
+		.row
+			.col-sm-3.col-md-2.card-list
+				include _cardlist
+
+			.col-sm-9.col-md-10.main(style='background-color: #f5f5f5;')
+				h1 Deck Summary
+
+
+	script.
+		$(document).ready(function() {
+			var cards = !{JSON.stringify(cards)};
+		});
+
+
+
+
+
