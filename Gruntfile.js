@@ -46,8 +46,13 @@ module.exports = function(grunt) {
     // Below, as a demonstration, you'll see the built-in dependencies
     // linked in the proper order order
 
+    'linker/js/lib/handlebars-1.0.0.js',
+    'linker/js/lib/ember.js',
+    'linker/js/lib/ember-data.js',
+
+
     // Bring in the socket.io client
-    'linker/js/socket.io.js',
+    'linker/js/lib/socket.io.js',
 
     // then beef it up with some convenience logic for talking to Sails.js
     'linker/js/sails.io.js',
@@ -135,12 +140,21 @@ module.exports = function(grunt) {
   grunt.loadTasks(path.join(depsPath, '/grunt-contrib-less/tasks'));
   grunt.loadTasks(path.join(depsPath, '/grunt-contrib-coffee/tasks'));
   grunt.loadTasks(path.join(depsPath, '/grunt-sync/tasks'));
+  grunt.loadNpmTasks('grunt-browserify');
+  grunt.loadNpmTasks('grunt-ember-templates');
 
 
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-
+/*    
+    browserify: {
+      basic: {
+        src: ['assets/js/initialize.js'],
+        dest: 'assets/linker/js/bundle.js'
+      }
+    },
+*/
     copy: {
       dev: {
         files: [{
@@ -159,13 +173,47 @@ module.exports = function(grunt) {
         }]
       }
     },
-
+    emberTemplates: {
+      compile: {
+        options: {
+          templateName: function(sourceFile){
+            return sourceFile.replace(/assets\/js\/templates\//,'');
+          }
+        },
+        files: {
+          'assets/linker/js/templates.js':["assets/js/templates/*.hbs"]
+        }
+      }
+    },
     sync: {
       dev: {
         files: [{
           cwd: './assets',
           src: ['**/*.!(coffee)'],
           dest: '.tmp/public'
+        }]
+      }
+    },
+
+    coffee: {
+      dev: {
+        options: {
+          bare: true,
+          sourceMap: true,
+          sourceRoot: './'
+        },
+        files: [{
+          expand: true,
+          cwd: 'assets/js/',
+          src: ['**/*.coffee'],
+          dest: '.tmp/public/js/',
+          ext: '.js'
+        }, {
+          expand: true,
+          cwd: 'assets/linker/js/',
+          src: ['**/*.coffee'],
+          dest: '.tmp/public/linker/js/',
+          ext: '.js'
         }]
       }
     },
@@ -205,29 +253,6 @@ module.exports = function(grunt) {
           src: ['*.less'],
           dest: '.tmp/public/linker/styles/',
           ext: '.css'
-        }]
-      }
-    },
-
-    coffee: {
-      dev: {
-        options: {
-          bare: true,
-          sourceMap: true,
-          sourceRoot: './'
-        },
-        files: [{
-          expand: true,
-          cwd: 'assets/js/',
-          src: ['**/*.coffee'],
-          dest: '.tmp/public/js/',
-          ext: '.js'
-        }, {
-          expand: true,
-          cwd: 'assets/linker/js/',
-          src: ['**/*.coffee'],
-          dest: '.tmp/public/linker/js/',
-          ext: '.js'
         }]
       }
     },
@@ -356,6 +381,8 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('compileAssets', [
+    'emberTemplates',
+//    'browserify',
     'clean:dev',
     'jst:dev',
     'less:dev',
