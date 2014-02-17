@@ -1,5 +1,5 @@
 Chillwind.Router.map(function() {
-	this.resource('analyze', { path: '/analyze' });
+	this.resource('analyze', { path: '/' });
 });
 
 Chillwind.AnalyzeRoute = Ember.Route.extend({

@@ -177,11 +177,11 @@ module.exports = function(grunt) {
       compile: {
         options: {
           templateName: function(sourceFile){
-            return sourceFile.replace(/assets\/js\/templates\//,'');
+            return sourceFile.replace(/assets\/templates\//,'');
           }
         },
         files: {
-          'assets/linker/js/templates.js':["assets/js/templates/*.hbs"]
+          'assets/linker/js/client/templates.js':["assets/templates/*.hbs"]
         }
       }
     },
